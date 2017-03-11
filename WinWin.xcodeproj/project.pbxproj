@@ -1,0 +1,321 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		70DC7DBB1E74348300045A1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DC7DBA1E74348300045A1D /* AppDelegate.swift */; };
+		70DC7DBD1E74348300045A1D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DC7DBC1E74348300045A1D /* ViewController.swift */; };
+		70DC7DC01E74348300045A1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70DC7DBE1E74348300045A1D /* Main.storyboard */; };
+		70DC7DC31E74348300045A1D /* WinWin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 70DC7DC11E74348300045A1D /* WinWin.xcdatamodeld */; };
+		70DC7DC51E74348300045A1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70DC7DC41E74348300045A1D /* Assets.xcassets */; };
+		70DC7DC81E74348300045A1D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70DC7DC61E74348300045A1D /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		70DC7DB71E74348300045A1D /* WinWin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WinWin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		70DC7DBA1E74348300045A1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		70DC7DBC1E74348300045A1D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		70DC7DBF1E74348300045A1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		70DC7DC21E74348300045A1D /* WinWin.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WinWin.xcdatamodel; sourceTree = "<group>"; };
+		70DC7DC41E74348300045A1D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		70DC7DC71E74348300045A1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		70DC7DC91E74348300045A1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		70DC7DB41E74348300045A1D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		70DC7DAE1E74348300045A1D = {
+			isa = PBXGroup;
+			children = (
+				70DC7DB91E74348300045A1D /* WinWin */,
+				70DC7DB81E74348300045A1D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		70DC7DB81E74348300045A1D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				70DC7DB71E74348300045A1D /* WinWin.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		70DC7DB91E74348300045A1D /* WinWin */ = {
+			isa = PBXGroup;
+			children = (
+				70DC7DBA1E74348300045A1D /* AppDelegate.swift */,
+				70DC7DBC1E74348300045A1D /* ViewController.swift */,
+				70DC7DBE1E74348300045A1D /* Main.storyboard */,
+				70DC7DC41E74348300045A1D /* Assets.xcassets */,
+				70DC7DC61E74348300045A1D /* LaunchScreen.storyboard */,
+				70DC7DC91E74348300045A1D /* Info.plist */,
+				70DC7DC11E74348300045A1D /* WinWin.xcdatamodeld */,
+			);
+			path = WinWin;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		70DC7DB61E74348300045A1D /* WinWin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 70DC7DCC1E74348300045A1D /* Build configuration list for PBXNativeTarget "WinWin" */;
+			buildPhases = (
+				70DC7DB31E74348300045A1D /* Sources */,
+				70DC7DB41E74348300045A1D /* Frameworks */,
+				70DC7DB51E74348300045A1D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WinWin;
+			productName = WinWin;
+			productReference = 70DC7DB71E74348300045A1D /* WinWin.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		70DC7DAF1E74348300045A1D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "WinWin Inc";
+				TargetAttributes = {
+					70DC7DB61E74348300045A1D = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 70DC7DB21E74348300045A1D /* Build configuration list for PBXProject "WinWin" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 70DC7DAE1E74348300045A1D;
+			productRefGroup = 70DC7DB81E74348300045A1D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				70DC7DB61E74348300045A1D /* WinWin */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		70DC7DB51E74348300045A1D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70DC7DC81E74348300045A1D /* LaunchScreen.storyboard in Resources */,
+				70DC7DC51E74348300045A1D /* Assets.xcassets in Resources */,
+				70DC7DC01E74348300045A1D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		70DC7DB31E74348300045A1D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70DC7DBD1E74348300045A1D /* ViewController.swift in Sources */,
+				70DC7DBB1E74348300045A1D /* AppDelegate.swift in Sources */,
+				70DC7DC31E74348300045A1D /* WinWin.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		70DC7DBE1E74348300045A1D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				70DC7DBF1E74348300045A1D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		70DC7DC61E74348300045A1D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				70DC7DC71E74348300045A1D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		70DC7DCA1E74348300045A1D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		70DC7DCB1E74348300045A1D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		70DC7DCD1E74348300045A1D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = WinWin/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.WinWin;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		70DC7DCE1E74348300045A1D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = WinWin/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.WinWin;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		70DC7DB21E74348300045A1D /* Build configuration list for PBXProject "WinWin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				70DC7DCA1E74348300045A1D /* Debug */,
+				70DC7DCB1E74348300045A1D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		70DC7DCC1E74348300045A1D /* Build configuration list for PBXNativeTarget "WinWin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				70DC7DCD1E74348300045A1D /* Debug */,
+				70DC7DCE1E74348300045A1D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		70DC7DC11E74348300045A1D /* WinWin.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				70DC7DC21E74348300045A1D /* WinWin.xcdatamodel */,
+			);
+			currentVersion = 70DC7DC21E74348300045A1D /* WinWin.xcdatamodel */;
+			path = WinWin.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 70DC7DAF1E74348300045A1D /* Project object */;
+}
