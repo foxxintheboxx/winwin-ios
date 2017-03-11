@@ -13,9 +13,11 @@
 		70DC7DC31E74348300045A1D /* WinWin.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 70DC7DC11E74348300045A1D /* WinWin.xcdatamodeld */; };
 		70DC7DC51E74348300045A1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70DC7DC41E74348300045A1D /* Assets.xcassets */; };
 		70DC7DC81E74348300045A1D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70DC7DC61E74348300045A1D /* LaunchScreen.storyboard */; };
+		9D49F3E466C6D5D1EE5A9AD2 /* Pods_WinWin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC8F7446BCC1ED644BD4640 /* Pods_WinWin.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6A6F2B33FAEDD030DE17CF2F /* Pods-WinWin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WinWin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WinWin/Pods-WinWin.debug.xcconfig"; sourceTree = "<group>"; };
 		70DC7DB71E74348300045A1D /* WinWin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WinWin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70DC7DBA1E74348300045A1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		70DC7DBC1E74348300045A1D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +26,9 @@
 		70DC7DC41E74348300045A1D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		70DC7DC71E74348300045A1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		70DC7DC91E74348300045A1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		70DC7DD21E74365C00045A1D /* WinWin-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WinWin-Bridging-Header.h"; sourceTree = "<group>"; };
+		82A9DBDA4E610D1FF61F25FF /* Pods-WinWin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WinWin.release.xcconfig"; path = "Pods/Target Support Files/Pods-WinWin/Pods-WinWin.release.xcconfig"; sourceTree = "<group>"; };
+		AFC8F7446BCC1ED644BD4640 /* Pods_WinWin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WinWin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +36,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D49F3E466C6D5D1EE5A9AD2 /* Pods_WinWin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		16903B98F80282CD16E4EB3C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AFC8F7446BCC1ED644BD4640 /* Pods_WinWin.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		70DC7DAE1E74348300045A1D = {
 			isa = PBXGroup;
 			children = (
 				70DC7DB91E74348300045A1D /* WinWin */,
 				70DC7DB81E74348300045A1D /* Products */,
+				AB645CF9277ED0EF7A0EBE43 /* Pods */,
+				16903B98F80282CD16E4EB3C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +72,9 @@
 		70DC7DB91E74348300045A1D /* WinWin */ = {
 			isa = PBXGroup;
 			children = (
+				70DC7DD11E7434E000045A1D /* Views */,
+				70DC7DD01E7434BC00045A1D /* Models */,
+				70DC7DCF1E7434B100045A1D /* Controllers */,
 				70DC7DBA1E74348300045A1D /* AppDelegate.swift */,
 				70DC7DBC1E74348300045A1D /* ViewController.swift */,
 				70DC7DBE1E74348300045A1D /* Main.storyboard */,
@@ -63,8 +82,39 @@
 				70DC7DC61E74348300045A1D /* LaunchScreen.storyboard */,
 				70DC7DC91E74348300045A1D /* Info.plist */,
 				70DC7DC11E74348300045A1D /* WinWin.xcdatamodeld */,
+				70DC7DD21E74365C00045A1D /* WinWin-Bridging-Header.h */,
 			);
 			path = WinWin;
+			sourceTree = "<group>";
+		};
+		70DC7DCF1E7434B100045A1D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		70DC7DD01E7434BC00045A1D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		70DC7DD11E7434E000045A1D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		AB645CF9277ED0EF7A0EBE43 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6A6F2B33FAEDD030DE17CF2F /* Pods-WinWin.debug.xcconfig */,
+				82A9DBDA4E610D1FF61F25FF /* Pods-WinWin.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +124,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 70DC7DCC1E74348300045A1D /* Build configuration list for PBXNativeTarget "WinWin" */;
 			buildPhases = (
+				94E789ECA09885E7D8796BF8 /* [CP] Check Pods Manifest.lock */,
 				70DC7DB31E74348300045A1D /* Sources */,
 				70DC7DB41E74348300045A1D /* Frameworks */,
 				70DC7DB51E74348300045A1D /* Resources */,
+				B1E006917A8FB8536D511993 /* [CP] Embed Pods Frameworks */,
+				5EECCBBA15A31D457A7935E3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -133,6 +186,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5EECCBBA15A31D457A7935E3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WinWin/Pods-WinWin-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		94E789ECA09885E7D8796BF8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B1E006917A8FB8536D511993 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WinWin/Pods-WinWin-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		70DC7DB31E74348300045A1D /* Sources */ = {
@@ -260,24 +361,28 @@
 		};
 		70DC7DCD1E74348300045A1D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6A6F2B33FAEDD030DE17CF2F /* Pods-WinWin.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = WinWin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.WinWin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WinWin/WinWin-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		70DC7DCE1E74348300045A1D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82A9DBDA4E610D1FF61F25FF /* Pods-WinWin.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = WinWin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.WinWin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WinWin/WinWin-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

@@ -1,0 +1,25 @@
+PODS:
+  - DeepstreamIO (2.0.0)
+  - GoogleMaps (2.1.0):
+    - GoogleMaps/Maps (= 2.1.0)
+  - GoogleMaps/Base (2.1.0)
+  - GoogleMaps/Maps (2.1.0):
+    - GoogleMaps/Base (= 2.1.0)
+  - SnapKit (3.1.2)
+  - SwiftyJSON (3.0.0)
+
+DEPENDENCIES:
+  - DeepstreamIO
+  - GoogleMaps (= 2.1.0)
+  - SnapKit
+  - SwiftyJSON (= 3.0.0)
+
+SPEC CHECKSUMS:
+  DeepstreamIO: 7fb5cb1fbf94cdf919739602264b235ad7b88e4b
+  GoogleMaps: 06589b9a38097bce0cd6e90f0fd9b5e4b4a9344c
+  SnapKit: 12b24f569cb7c143acc9c22b9d91b23e7b1c84a2
+  SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
+
+PODFILE CHECKSUM: e5abbf70db806cf96dc6ddbf73f731ac2754dd23
+
+COCOAPODS: 1.1.1
