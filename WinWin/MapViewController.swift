@@ -1,3 +1,4 @@
+
 //
 //  MapViewController.swift
 //  Feed Me
@@ -58,6 +59,7 @@ class MapViewController: UIViewController {
         mapView.settings.consumesGesturesInView = false
         mapView.settings.zoomGestures = true
         mapView.settings.myLocationButton = true
+        mapView.isMyLocationEnabled = false
         // Set the map style by passing a valid JSON string.
         do {
             // Set the map style by passing a valid JSON string.
@@ -72,9 +74,6 @@ class MapViewController: UIViewController {
             self.markerNearUser?.whenReady(self)
             self.markerNearUser?.subscribe(self)
         }
-        let coinCoord = CLLocationCoordinate2D(latitude: 32.0618339, longitude: 34.77059)
-        let marker = WWMarker(coordinate: coinCoord)
-        marker.map = self.mapView
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -87,7 +86,6 @@ extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedWhenInUse {
             locationManager.startUpdatingLocation()
-            mapView.isMyLocationEnabled = true
         }
     }
     
@@ -95,6 +93,9 @@ extension MapViewController: CLLocationManagerDelegate {
         if let curr = locations.first {
             if let prev = self.lastLocation {
                 if (curr.coordinate.latitude != prev.latitude || curr.coordinate.longitude != prev.longitude) {
+                    var userLocationMarker = GMSMarker.init(position: curr.coordinate)
+                    userLocationMarker.icon = "🐯".image()
+                    userLocationMarker.map = self.mapView
                     mapView.camera = GMSCameraPosition(target: curr.coordinate, zoom: 15, bearing: 0, viewingAngle: 45)
                     updateDSLocation(coordinate: curr.coordinate)
                     self.lastLocation = curr.coordinate
@@ -170,7 +171,6 @@ extension MapViewController {
 
 extension MapViewController {
     func updateDSLocation(coordinate : CLLocationCoordinate2D) {
-        print("updating location")
         self.userLocation?.set(["lat": coordinate.latitude, "lng": coordinate.longitude].jsonElement)
     }
     
@@ -183,27 +183,28 @@ extension MapViewController {
             let data = nearUser.get().dict
             let objectIds = Array(data.keys)
             for uid in objectIds {
-                let record = self.dsSingleton?.client?.record.getRecord("coins/" + uid)
-                record?.whenReady(self)
-                
+                self.dsSingleton?.client?.record.getRecord("coins/" + uid).whenReady(self)
             }
         }
     }
     
+    // Removing old markers
     func requestRecordsNearUser(data : JsonElement) {
         DispatchQueue.global().async {
             let data = data.dict
             let objectIds = Array(data.keys)
-            var idsToIndex = objectIds.indexedDictionary
-            for uid in objectIds {
-                let record = self.dsSingleton?.client?.record.getRecord("coins/" + uid)
-                idsToIndex.removeValue(forKey: uid)
-                record?.whenReady(self)
+            var idsToRemove = Array(self.recordsOnMap.keys).indexedDictionary
+            for (index, uid) in objectIds.enumerated() {
+                self.dsSingleton?.client?.record.getRecord("coins/" + uid).whenReady(self)
+                idsToRemove.removeValue(forKey: index)
             }
-            for uid in Array(idsToIndex.keys) {
-                let marker = self.recordsOnMap[uid]
-                marker.map = nil
-                self.recordsOnMap.removeValue(forKey: uid)
+            DispatchQueue.main.async {
+                for uid in Array(idsToRemove.values) {
+                    print(uid)
+                    let marker : WWMarker = self.recordsOnMap[uid]!
+                    marker.map = nil
+                    self.recordsOnMap.removeValue(forKey: uid)
+                }
             }
         }
     }
