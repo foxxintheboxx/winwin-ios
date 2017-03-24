@@ -260,20 +260,6 @@ extension GameMapViewController {
 
     func makePlaceMarkerFromRecord(uid : String, geoRecord : Record!) {
         DispatchQueue.main.async {
-//            let recordData = geoRecord.get().dict
-//            let locationObj = self.serializedDataToJsonObject(recordData["location"])
-//            let coordinatesObj = self.serializedDataToJsonObject(locationObj.dict["coordinates"])
-//            let latLng = coordinatesObj.dict as? [String : Double]
-//            let coinCoord = CLLocationCoordinate2D(latitude: (latLng?["lat"]!)!, longitude: (latLng?["lng"]!)!)
-//            let type = recordData["type"] as? String!
-//            let hex = recordData["color"] as? String!
-//            let marker = type == "coin" ? WWCoinMarker(coordinate: coinCoord) : WWCrumbMarker(coordinate: coinCoord, hex: hex!)
-//            marker.record = geoRecord
-//            marker.coinData = [ "uid" : uid ]
-//            marker.map = self.mapView
-//            self.recordsOnMap[geoRecord.name()] = marker
-//            geoRecord.subscribe("owner", recordPathChangedCallback: self, triggerNow: false)
-//            self.recordsSubscribed["owner"] = geoRecord
             
             let recordData = geoRecord.get().deepDict
             if let locationObj = recordData["location"] as? [String : Any?] {
