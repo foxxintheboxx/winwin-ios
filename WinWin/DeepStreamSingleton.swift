@@ -16,6 +16,7 @@ class DeepStreamSingleton : NSObject {
     var password: String?
     //var userData: [String : String]? // change to purely Stack memory
     var userUID : String?
+    var userRecord: Record?
     
     static let sharedInstance : DeepStreamSingleton = {
         let instance = DeepStreamSingleton()
@@ -25,6 +26,8 @@ class DeepStreamSingleton : NSObject {
     
     override
     init() {
+        let global = "winwin-ds-server.herokuapp.com:80"
+        let local = "127.0.0.1:6020"
         client = DeepstreamClient("127.0.0.1:6020")
     }
     
@@ -51,12 +54,9 @@ class DeepStreamSingleton : NSObject {
         } else {
             let jsonData = loginResult.getData() as? JsonObject
             let data = jsonData?.dict as? [String: Any?]
-            print(jsonData)
-            print(data)
             self.userUID = data?["uid"] as! String?
+            self.userRecord = self.client?.record.getRecord("users/" + self.userUID!)
             print("Subscriber: Login Success")
-
-
             return true
         }
         

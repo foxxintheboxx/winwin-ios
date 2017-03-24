@@ -9,7 +9,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var usernameTextField: UITextField!
     
@@ -23,9 +23,23 @@ class LoginViewController: UIViewController {
         self.loginButton.isUserInteractionEnabled = false;
         self.usernameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         self.passwordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        self.usernameTextField.returnKeyType = UIReturnKeyType.continue
+        self.passwordTextField.returnKeyType = UIReturnKeyType.done
+        self.usernameTextField.delegate = self
+        self.passwordTextField.delegate = self
+        
 
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if (textField == self.usernameTextField) {
+            print("here")
+            self.passwordTextField.becomeFirstResponder()
+        } else {
+            self.passwordTextField.resignFirstResponder()
+        }
+        return false
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -55,7 +69,7 @@ class LoginViewController: UIViewController {
     }
     
     func segueToVertScrollController() {
-        let mapViewController = self.storyboard?.instantiateViewController(withIdentifier :"MapViewController") as! MapViewController
+        let mapViewController = self.storyboard?.instantiateViewController(withIdentifier :"GameMapViewController") as! GameMapViewController
         let gameMenuViewController = self.storyboard?.instantiateViewController(withIdentifier :"GameMenuViewController") as! GameMenuViewController
         let vertScrollViewController = VerticalScrollViewController.verticalScrollVcWith(middleVc: mapViewController,
                                                                                          topVc: nil,
