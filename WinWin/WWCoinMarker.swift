@@ -12,6 +12,6 @@ class WWCoinMarker : WWMarker {
     
     override init(coordinate: CLLocationCoordinate2D) {
         super.init(coordinate: coordinate)
-        icon = UIImage(named: "bitcoin-icon")?.resizeWith(percentage: 0.05)
+        icon = UIImage(named: "bitcoin-icon")?.resized(withPercentage: 0.05)
     }
 }

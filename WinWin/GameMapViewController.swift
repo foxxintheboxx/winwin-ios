@@ -1,29 +1,7 @@
 
 //
 //  GameMapViewController.swift
-//  Feed Me
 //
-/*
- * Copyright (c) 2015 Razeware LLC
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 
 import UIKit
 import SnapKit
@@ -33,13 +11,10 @@ import SwiftyJSON
 let kMapStyle = "[ { \"elementType\": \"labels\", \"stylers\": [ {  \"visibility\": \"off\" } ] }, { \"featureType\": \"administrative.land_parcel\", \"stylers\": [ {  \"visibility\": \"off\" } ] }, { \"featureType\": \"administrative.neighborhood\", \"stylers\": [ {  \"visibility\": \"off\" } ] } ]"
 
 class GameMapViewController: UIViewController {
-
-
     
     @IBOutlet var locationArrow: UIImageView!
     @IBOutlet weak var mapView: GMSMapView!
     let locationManager = CLLocationManager()
-//    let dataProvider = GoogleDataProvider()
     let searchRadius: Double = 1000
     var dsSingleton : DeepStreamSingleton?
     var userLocation : Record?
@@ -51,8 +26,6 @@ class GameMapViewController: UIViewController {
     var lastAngleFromNorth : CLLocationDirection = Double(180)
     var mapBearing : CLLocationDegrees?
     var blueBoxView: UIImageView?
-
-    
     var lastLocation : CLLocationCoordinate2D?
     
     override func viewDidLoad() {
@@ -126,7 +99,6 @@ extension GameMapViewController: CLLocationManagerDelegate {
                 return CGPoint(x: frame.size.width / 2 * CGFloat((bearing - 315)) / 45.0, y: 0)
             } else {
                 return CGPoint(x: frame.size.width - (frame.size.width / 2 * (1 - CGFloat((bearing)) / 45.0)), y: 0)
-
             }
         } else if (bearing >= 45 && bearing < 135) {
             return CGPoint(x: frame.size.width, y: (frame.size.height) * CGFloat((bearing - 45)) / 90.0)
@@ -251,6 +223,8 @@ extension GameMapViewController {
     }
     
 }
+
+
 
 
 //Keep all the uids, then any uids of not count i will be removed and discarded

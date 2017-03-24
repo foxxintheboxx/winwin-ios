@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		704B99CF1E81E1820035436C /* WWMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704B99CE1E81E1820035436C /* WWMarker.swift */; };
+		70501EA61E85912800F507BB /* Deepstream+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70501EA51E85912800F507BB /* Deepstream+Extensions.swift */; };
+		70501EA91E85926500F507BB /* WinWinExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70501EA81E85926500F507BB /* WinWinExtensions.swift */; };
 		7057C5491E7492AD006224F6 /* RunTimeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7057C5481E7492AD006224F6 /* RunTimeHandler.swift */; };
 		7057C54B1E7492EB006224F6 /* AppConnectionStateListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7057C54A1E7492EA006224F6 /* AppConnectionStateListener.swift */; };
-		7057C54F1E74A264006224F6 /* SubscribeRecordChangedCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7057C54E1E74A264006224F6 /* SubscribeRecordChangedCallback.swift */; };
 		7096E8EB1E75A54D00A93F25 /* MarkerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7096E8EA1E75A54D00A93F25 /* MarkerViewController.swift */; };
 		7098FEB01E81DD25003B4907 /* WWCrumbMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7098FEAF1E81DD25003B4907 /* WWCrumbMarker.swift */; };
 		70ADD3791E74A8A100103C70 /* VerticalScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70ADD3781E74A8A100103C70 /* VerticalScrollViewController.swift */; };
@@ -24,9 +25,6 @@
 		70DC7DD41E74403D00045A1D /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DC7DD31E74403D00045A1D /* SignupViewController.swift */; };
 		70DC7DD61E7440E600045A1D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DC7DD51E7440E600045A1D /* LoginViewController.swift */; };
 		70DC7DD81E7444CB00045A1D /* GameMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DC7DD71E7444CB00045A1D /* GameMapViewController.swift */; };
-		70DC7DDD1E745C8D00045A1D /* DeepstreamClient+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DC7DD91E745C8D00045A1D /* DeepstreamClient+Extensions.swift */; };
-		70DC7DDE1E745C8D00045A1D /* GSON+Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DC7DDA1E745C8D00045A1D /* GSON+Types.swift */; };
-		70DC7DDF1E745C8D00045A1D /* JavaUtilProperties+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DC7DDB1E745C8D00045A1D /* JavaUtilProperties+Extension.swift */; };
 		70DC7DE11E748CD700045A1D /* DeepStreamSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DC7DE01E748CD700045A1D /* DeepStreamSingleton.swift */; };
 		70EEE84D1E7ADB8C0000E2BC /* GeoPointCompass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EEE84C1E7ADB8C0000E2BC /* GeoPointCompass.swift */; };
 		9D49F3E466C6D5D1EE5A9AD2 /* Pods_WinWin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC8F7446BCC1ED644BD4640 /* Pods_WinWin.framework */; };
@@ -35,9 +33,10 @@
 /* Begin PBXFileReference section */
 		6A6F2B33FAEDD030DE17CF2F /* Pods-WinWin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WinWin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WinWin/Pods-WinWin.debug.xcconfig"; sourceTree = "<group>"; };
 		704B99CE1E81E1820035436C /* WWMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WWMarker.swift; sourceTree = "<group>"; };
+		70501EA51E85912800F507BB /* Deepstream+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Deepstream+Extensions.swift"; path = "swift/Deepstream+Extensions.swift"; sourceTree = "<group>"; };
+		70501EA81E85926500F507BB /* WinWinExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WinWinExtensions.swift; sourceTree = "<group>"; };
 		7057C5481E7492AD006224F6 /* RunTimeHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunTimeHandler.swift; sourceTree = "<group>"; };
 		7057C54A1E7492EA006224F6 /* AppConnectionStateListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConnectionStateListener.swift; sourceTree = "<group>"; };
-		7057C54E1E74A264006224F6 /* SubscribeRecordChangedCallback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscribeRecordChangedCallback.swift; sourceTree = "<group>"; };
 		7096E8EA1E75A54D00A93F25 /* MarkerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkerViewController.swift; sourceTree = "<group>"; };
 		7098FEAF1E81DD25003B4907 /* WWCrumbMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WWCrumbMarker.swift; sourceTree = "<group>"; };
 		70ADD3781E74A8A100103C70 /* VerticalScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalScrollViewController.swift; sourceTree = "<group>"; };
@@ -54,9 +53,6 @@
 		70DC7DD31E74403D00045A1D /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		70DC7DD51E7440E600045A1D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		70DC7DD71E7444CB00045A1D /* GameMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMapViewController.swift; sourceTree = "<group>"; };
-		70DC7DD91E745C8D00045A1D /* DeepstreamClient+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "DeepstreamClient+Extensions.swift"; path = "swift/DeepstreamClient+Extensions.swift"; sourceTree = "<group>"; };
-		70DC7DDA1E745C8D00045A1D /* GSON+Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GSON+Types.swift"; path = "swift/GSON+Types.swift"; sourceTree = "<group>"; };
-		70DC7DDB1E745C8D00045A1D /* JavaUtilProperties+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "JavaUtilProperties+Extension.swift"; path = "swift/JavaUtilProperties+Extension.swift"; sourceTree = "<group>"; };
 		70DC7DE01E748CD700045A1D /* DeepStreamSingleton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeepStreamSingleton.swift; sourceTree = "<group>"; };
 		70EEE84C1E7ADB8C0000E2BC /* GeoPointCompass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoPointCompass.swift; sourceTree = "<group>"; };
 		82A9DBDA4E610D1FF61F25FF /* Pods-WinWin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WinWin.release.xcconfig"; path = "Pods/Target Support Files/Pods-WinWin/Pods-WinWin.release.xcconfig"; sourceTree = "<group>"; };
@@ -83,11 +79,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		70501EA71E85924200F507BB /* MyResources */ = {
+			isa = PBXGroup;
+			children = (
+				70501EA81E85926500F507BB /* WinWinExtensions.swift */,
+			);
+			name = MyResources;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		7057C5471E749291006224F6 /* DeepStream */ = {
 			isa = PBXGroup;
 			children = (
 				70DC7DE01E748CD700045A1D /* DeepStreamSingleton.swift */,
-				7057C54E1E74A264006224F6 /* SubscribeRecordChangedCallback.swift */,
 				7057C54A1E7492EA006224F6 /* AppConnectionStateListener.swift */,
 				7057C5481E7492AD006224F6 /* RunTimeHandler.swift */,
 			);
@@ -127,6 +131,7 @@
 				70DC7DC91E74348300045A1D /* Info.plist */,
 				70DC7DC11E74348300045A1D /* WinWin.xcdatamodeld */,
 				70DC7DD21E74365C00045A1D /* WinWin-Bridging-Header.h */,
+				70501EA71E85924200F507BB /* MyResources */,
 				70DC7DDC1E745C8D00045A1D /* Resources */,
 			);
 			path = WinWin;
@@ -165,9 +170,7 @@
 		70DC7DDC1E745C8D00045A1D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				70DC7DD91E745C8D00045A1D /* DeepstreamClient+Extensions.swift */,
-				70DC7DDA1E745C8D00045A1D /* GSON+Types.swift */,
-				70DC7DDB1E745C8D00045A1D /* JavaUtilProperties+Extension.swift */,
+				70501EA51E85912800F507BB /* Deepstream+Extensions.swift */,
 			);
 			name = Resources;
 			path = ../Pods/DeepstreamIO;
@@ -319,20 +322,18 @@
 				70DC7DD41E74403D00045A1D /* SignupViewController.swift in Sources */,
 				70DC7DE11E748CD700045A1D /* DeepStreamSingleton.swift in Sources */,
 				70EEE84D1E7ADB8C0000E2BC /* GeoPointCompass.swift in Sources */,
-				70DC7DDF1E745C8D00045A1D /* JavaUtilProperties+Extension.swift in Sources */,
 				70ADD37D1E75902B00103C70 /* WWCoinMarker.swift in Sources */,
 				7096E8EB1E75A54D00A93F25 /* MarkerViewController.swift in Sources */,
 				70DC7DD61E7440E600045A1D /* LoginViewController.swift in Sources */,
 				70DC7DD81E7444CB00045A1D /* GameMapViewController.swift in Sources */,
 				70ADD37B1E74A9A000103C70 /* GameMenuViewController.swift in Sources */,
 				704B99CF1E81E1820035436C /* WWMarker.swift in Sources */,
-				70DC7DDE1E745C8D00045A1D /* GSON+Types.swift in Sources */,
 				7057C5491E7492AD006224F6 /* RunTimeHandler.swift in Sources */,
-				7057C54F1E74A264006224F6 /* SubscribeRecordChangedCallback.swift in Sources */,
-				70DC7DDD1E745C8D00045A1D /* DeepstreamClient+Extensions.swift in Sources */,
 				7098FEB01E81DD25003B4907 /* WWCrumbMarker.swift in Sources */,
+				70501EA91E85926500F507BB /* WinWinExtensions.swift in Sources */,
 				70DC7DC31E74348300045A1D /* WinWin.xcdatamodeld in Sources */,
 				70ADD3791E74A8A100103C70 /* VerticalScrollViewController.swift in Sources */,
+				70501EA61E85912800F507BB /* Deepstream+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
