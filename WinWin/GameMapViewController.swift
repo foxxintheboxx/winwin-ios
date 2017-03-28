@@ -15,7 +15,6 @@ class GameMapViewController: UIViewController {
     @IBOutlet var locationArrow: UIImageView!
     @IBOutlet weak var mapView: GMSMapView!
     let locationManager = CLLocationManager()
-    let searchRadius: Double = 1000
     var dsSingleton : DeepStreamSingleton?
     var userLocation : Record?
     var markerNearUser : Record?
@@ -86,32 +85,10 @@ extension GameMapViewController: CLLocationManagerDelegate {
         }
     }
     
-    
     func locationManager(_ manager: CLLocationManager!, didUpdateHeading newHeading: CLHeading!) {
-        self.blueBoxView?.center = transform(bearing: newHeading.trueHeading, frame: self.mapView.frame)
+        self.blueBoxView?.center = CGPoint.transform(bearing: newHeading.trueHeading, frame: self.mapView.frame)
     
     }
-    
-    func transform(bearing : CLLocationDirection, frame : CGRect ) -> CGPoint {
-        print(bearing)
-        if (( bearing >= 0 && bearing < 45) ||  (bearing <= 360 && bearing > 315)) {
-            if (bearing > 315) {
-                return CGPoint(x: frame.size.width / 2 * CGFloat((bearing - 315)) / 45.0, y: 0)
-            } else {
-                return CGPoint(x: frame.size.width - (frame.size.width / 2 * (1 - CGFloat((bearing)) / 45.0)), y: 0)
-            }
-        } else if (bearing >= 45 && bearing < 135) {
-            return CGPoint(x: frame.size.width, y: (frame.size.height) * CGFloat((bearing - 45)) / 90.0)
-
-        } else if (bearing >= 135 && bearing < 225) {
-            return CGPoint(x: frame.size.width * (1 - CGFloat((bearing - 135)) / 90.0), y: frame.size.height)
-
-        } else {
-            return CGPoint(x: 0, y: (frame.size.height) * (1.0  - CGFloat((bearing - 225)) / 90.0))
-
-        }
-    }
-    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let curr = locations.first {
@@ -223,8 +200,6 @@ extension GameMapViewController {
     }
     
 }
-
-
 
 
 //Keep all the uids, then any uids of not count i will be removed and discarded
