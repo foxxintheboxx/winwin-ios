@@ -28,13 +28,8 @@ class DeepStreamSingleton : NSObject {
     init() {
         let global = "winwin-ds-server.herokuapp.com:80"
         let local = "127.0.0.1:6020"
-        client = DeepstreamClient("127.0.0.1:6020")
+        client = DeepstreamClient(global)
     }
-    
-    //MARK: Local Variable
-    
-
-    
     //MARK: Init Array
 
     

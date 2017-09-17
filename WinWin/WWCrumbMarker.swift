@@ -12,6 +12,7 @@ class WWCrumbMarker : WWMarker {
     
     init(coordinate: CLLocationCoordinate2D, hex: String) {
         super.init(coordinate: coordinate)
-        icon = UIImage.circle(diameter: 20, color: UIColor.init(hexString: hex))
+        icon = UIImage.globe(diameter: 30, color: UIColor.init(hexString: hex));
+
     }
 }

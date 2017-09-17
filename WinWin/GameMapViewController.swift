@@ -7,12 +7,12 @@ import UIKit
 import SnapKit
 import GoogleMaps
 import SwiftyJSON
+import Pulsator
 
-let kMapStyle = "[ { \"elementType\": \"labels\", \"stylers\": [ {  \"visibility\": \"off\" } ] }, { \"featureType\": \"administrative.land_parcel\", \"stylers\": [ {  \"visibility\": \"off\" } ] }, { \"featureType\": \"administrative.neighborhood\", \"stylers\": [ {  \"visibility\": \"off\" } ] } ]"
 
-class GameMapViewController: UIViewController {
+class GameMapViewController: MapViewController, RadarViewControllerDelegate {
+
     
-    @IBOutlet var locationArrow: UIImageView!
     @IBOutlet weak var mapView: GMSMapView!
     let locationManager = CLLocationManager()
     var dsSingleton : DeepStreamSingleton?
@@ -20,12 +20,11 @@ class GameMapViewController: UIViewController {
     var markerNearUser : Record?
     var recordsSubscribed : [String: Record] = [String : Record]()
     var recordsOnMap : [String : WWMarker] = [String : WWMarker]()
+    var recordsOnRadar : [String : UIImageView?] = [String : UIImageView?]()
     var userLocationMarker: GMSMarker?
-    var compass: GeoPointCompass?
-    var lastAngleFromNorth : CLLocationDirection = Double(180)
-    var mapBearing : CLLocationDegrees?
-    var blueBoxView: UIImageView?
-    var lastLocation : CLLocationCoordinate2D?
+    var usingRadar : Bool = false
+    var bearing: CLLocationDegrees = 360.0
+    var camera: GMSMutableCameraPosition?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,34 +32,19 @@ class GameMapViewController: UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingHeading()
         
         mapView.delegate = self
-        mapView.settings.scrollGestures = true
-        mapView.settings.rotateGestures = true
-        mapView.settings.consumesGesturesInView = true
-        mapView.settings.zoomGestures = true
-        mapView.settings.myLocationButton = false
-        mapView.isMyLocationEnabled = false
-        mapView.addSubview(self.locationArrow)
-        mapView.isBuildingsEnabled = false
-        self.compass = GeoPointCompass()
+
+        self.setupGMSMapSettings(mapView)
         self.userLocationMarker = GMSMarker.init(position: (locationManager.location?.coordinate)!)
         if let currLocation = self.userLocationMarker {
-            currLocation.iconView = UIImageView.init(image: "🐯".image())
+            let coordinates = (locationManager.location?.coordinate)!
+            currLocation.icon = "🐯".image(width: 60.0, height: 60.0, fontSize: 60.0)
             currLocation.tracksViewChanges = false
+            camera = GMSMutableCameraPosition.camera(withLatitude: coordinates.latitude, longitude: coordinates.longitude, zoom: Float(kMapZoom))
+            mapView.camera = camera!
             currLocation.map = self.mapView
-            self.compass?.arrowImageView = currLocation.iconView
         }
-        // Set the map style by passing a valid JSON string.
-        do {
-            // Set the map style by passing a valid JSON string.
-            mapView.mapStyle = try GMSMapStyle(jsonString: kMapStyle)
-        } catch {
-            print("One or more of the map styles failed to load. \(error)")
-        }
-        blueBoxView = UIImageView.init(image: UIImage.circle(diameter: 100, color: UIColor.blue))
-        mapView.addSubview(blueBoxView!)
         
         DispatchQueue.global().async {
             self.dsSingleton = DeepStreamSingleton.sharedInstance;
@@ -71,8 +55,17 @@ class GameMapViewController: UIViewController {
             self.dsSingleton?.userRecord?.whenReady(self)
         }
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+    func toggleRadar(_ useRadar: Bool) {
+        usingRadar = useRadar
+        if useRadar {
+            locationManager.startUpdatingHeading()
+        } else {
+            locationManager.stopUpdatingHeading()
+        }
+        for view in Array(self.recordsOnRadar.values) {
+            view?.isHidden = !useRadar;
+        }
     }
 }
 
@@ -85,33 +78,59 @@ extension GameMapViewController: CLLocationManagerDelegate {
         }
     }
     
-    func locationManager(_ manager: CLLocationManager!, didUpdateHeading newHeading: CLHeading!) {
-        self.blueBoxView?.center = CGPoint.transform(bearing: newHeading.trueHeading, frame: self.mapView.frame)
-    
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+
+        self.bearing = newHeading.trueHeading
+        let camera = GMSCameraPosition.camera(
+            withLatitude: mapView.camera.target.latitude,
+            longitude: mapView.camera.target.longitude,
+            zoom: mapView.camera.zoom,
+            bearing: self.bearing,
+            viewingAngle: mapView.camera.viewingAngle
+        )
+        mapView.animate(with: GMSCameraUpdate.setCamera(camera))
+        for (uid, coinView) in Array(self.recordsOnRadar) {
+            if let userLocation = self.locationManager.location {
+                if let view = coinView {
+                    let marker = self.recordsOnMap[uid]
+                    let angle = userLocation.coordinate.calculateAngle(location: (marker?.position)!)
+                    var bearing = angle - Double(newHeading.magneticHeading)
+                    let relativeCenter = 360.0 - angle
+                    bearing += relativeCenter
+                    let bearingBounds = CGPoint.calculateQuartileBounds(center: Int(relativeCenter))
+                    view.center = CGPoint.transform(
+                        bearing: Float(bearing),
+                        frame: mapView.frame,
+                        bounds: bearingBounds
+                    )
+                }
+            }
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let curr = locations.first {
-            if let prev = self.lastLocation {
-                if (curr.coordinate.latitude != prev.latitude || curr.coordinate.longitude != prev.longitude) {
-                    if let currLocation = self.userLocationMarker {
-                        CATransaction.begin()
-                        CATransaction.setAnimationDuration(1.0)
-                        currLocation.position =  curr.coordinate
-                        CATransaction.commit()
-                        
+        if let curr = self.locationManager.location {
+            if let currLocation = self.userLocationMarker {
+                currLocation.position =  curr.coordinate
+                let lat = curr.coordinate.latitude
+                let lng = curr.coordinate.longitude
+                let camera = GMSCameraPosition.camera(
+                    withLatitude: lat,
+                    longitude: lng,
+                    zoom: mapView.camera.zoom,
+                    bearing: self.bearing,
+                    viewingAngle: mapView.camera.viewingAngle
+                )
+                mapView.animate(with: GMSCameraUpdate.setCamera(camera))
+                updateDSLocation(coordinate: curr.coordinate)
+                let visibleRegion = mapView.projection.visibleRegion()
+                let mapVisibleBounds = GMSCoordinateBounds.init(region: visibleRegion)
+                for (uid, marker) in Array(recordsOnMap) {
+                    if let view = recordsOnRadar[uid] {
+                        let hide = mapVisibleBounds.contains(marker.position)
+                        self.hideRadarCoinView(coin: view!, hide: hide)
                     }
-                    mapView.camera = GMSCameraPosition(target: curr.coordinate, zoom:20, bearing: mapView.camera.bearing, viewingAngle: mapView.camera.viewingAngle)
-                    updateDSLocation(coordinate: curr.coordinate)
-                    self.lastLocation = curr.coordinate
-                    
                 }
-            } else {
-                mapView.camera = GMSCameraPosition(target: curr.coordinate, zoom:20, bearing: mapView.camera.bearing, viewingAngle: mapView.camera.viewingAngle)
-                //        locationManager.stopUpdatingLocation()
-                self.lastLocation = curr.coordinate
-                //sendLocation(curr.coordinate)
-                
             }
         }
     }
@@ -120,57 +139,36 @@ extension GameMapViewController: CLLocationManagerDelegate {
 // MARK: - GMSMapViewDelegate
 extension GameMapViewController: GMSMapViewDelegate {
     
-    func mapView(_ mapView: GMSMapView, markerInfoContents marker: GMSMarker) -> UIView? {
-        return nil
-    }
-    
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-
         DispatchQueue.global().async {
-            
             let wwMarker = marker as! WWMarker
-            print("trying to pick up")
             if let coinData = wwMarker.coinData {
-                let data = ["coin" : coinData["uid"]]
-                print(data)
-                guard let rpcResponse = self.dsSingleton?.client?.rpc.make("pickup-coin", data: data.jsonElement) else {
+                let data = ["object" : coinData["uid"]]
+                print("IANWOX " + String(describing: data))
+                guard let rpcResponse = self.dsSingleton?.client?.rpc.make("pickup-object", data: data.jsonElement) else {
                     print("RPC failed")
                     return
                 }
-                print("Subscriber: RPC success with data: \(rpcResponse.getData()!)")
+                print(rpcResponse.getData())
             }
         }
         return true
     }
 }
 
-// MARK: Segues
-extension GameMapViewController {
-    func presentMarkerViewController(marker : GMSMarker) {
-        let markerViewController = self.storyboard?.instantiateViewController(withIdentifier :"MarkerViewController") as! MarkerViewController
-        markerViewController.modalPresentationStyle = .overCurrentContext
-        markerViewController.modalTransitionStyle = .crossDissolve
-        markerViewController.preferredContentSize = CGSize(width: 200, height: 200)
-        present(markerViewController, animated: true, completion: nil)
-        let popoverPresentationController = markerViewController.popoverPresentationController
-        popoverPresentationController?.sourceView = self.view
-        popoverPresentationController?.sourceRect = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
-    }
-}
-
 // MARK: DSClient Background Calls
-
 extension GameMapViewController {
     func updateDSLocation(coordinate : CLLocationCoordinate2D) {
+        print("setting")
         self.userLocation?.set(["lat": coordinate.latitude, "lng": coordinate.longitude].jsonElement)
     }
     
     func requestRecordsNearUser(nearUser : Record) {
         DispatchQueue.global().async {
-            let data = nearUser.get().dict
-            let objectIds = Array(data.keys)
-            for uid in objectIds {
-                self.dsSingleton?.client?.record.getRecord("object/" + uid).whenReady(self)
+            let data = nearUser.get().deepDict
+            let objectNames = Array(data.keys)
+            for name in objectNames {
+                self.dsSingleton?.client?.record.getRecord(name).whenReady(self)
             }
         }
     }
@@ -178,29 +176,68 @@ extension GameMapViewController {
     // Removing old markers
     func requestRecordsNearUser(data : JsonElement) {
         DispatchQueue.global().async {
-            let data = data.dict
-            let objectIds = Array(data.keys)
+            let data = data.deepDict
+            print("IANFOX " + String(data.count))
+            let objectNames = Array(data.keys)
+            print("IANFOX " + String(describing: objectNames))
             var idsToRemove = Array(self.recordsOnMap.keys).indexedDictionary
-            for (index, uid) in objectIds.enumerated() {
-                self.dsSingleton?.client?.record.getRecord("object/" + uid).whenReady(self)
-                idsToRemove.removeValue(forKey: index)
+            for name in objectNames {
+                self.dsSingleton?.client?.record.getRecord(name).whenReady(self)
+                idsToRemove.removeValue(forKey: name)
             }
+            for name in Array(idsToRemove.values) {
+                print("IANFOX " + String(describing: data[name]))
+                self.removeOldMarker(name: name)
+            }
+        }
+
+    }
+    
+    func removeOldMarker( name: String ) {
+        let markerOpt : WWMarker? = self.recordsOnMap[name] as WWMarker?
+        print("IANFOX " + name)
+        if let marker = markerOpt {
+            let origin = mapView.projection.point(for: marker.position)
+            marker.map = nil
             DispatchQueue.main.async {
-                for uid in Array(idsToRemove.values) {
-                    self.removeOldMarker(uid: uid)
+                let data = marker.record?.get().deepDict
+                let owner = data?["owner"] as! String?
+                if (owner == self.dsSingleton?.userUID) {
+                    let labelRect = CGRect.init(origin: CGPoint.zero, size: CGSize.init(width: 150, height: 50))
+                    let label = UILabel.init(frame: labelRect)
+                    label.center = CGPoint.init(x: origin.x, y: origin.y - 20)
+                    label.textAlignment = NSTextAlignment.center
+                    let font = UIFont.init(name: "GillSans-Bold", size: 50.0)
+                    label.font = font
+                    label.textColor = UIColor.init(hexString: "daa520")
+                    if let val = data?["value"] {
+                        let intVal = val as! Int
+                        label.text = "\(intVal)"
+                    }
+                    self.mapView.addSubview(label)
+                    UIView.animate(withDuration: 0.8, animations: {
+                        label.alpha = 0.0
+                        label.center = CGPoint.init(x: label.center.x, y: label.center.y - 75)
+                    }, completion:
+                        { (finished: Bool) in
+                            label.removeFromSuperview()
+                    })
                 }
             }
+            self.recordsOnRadar.removeValue(forKey: name)??.removeFromSuperview()
+            self.recordsOnMap.removeValue(forKey: name)?.record?.discard()
         }
     }
     
-    func removeOldMarker( uid: String ) {
-        let marker : WWMarker = self.recordsOnMap[uid]!
-        marker.map = nil
-        self.recordsOnMap.removeValue(forKey: uid)?.record?.discard()
+    func hideRadarCoinView(coin: UIView, hide: Bool) {
+        if !self.usingRadar || hide {
+            coin.isHidden = true
+        } else {
+            coin.isHidden = false
+        }
     }
     
 }
-
 
 //Keep all the uids, then any uids of not count i will be removed and discarded
 // https://www.raywenderlich.com/148515/grand-central-dispatch-tutorial-swift-3-part-2
@@ -208,21 +245,28 @@ extension GameMapViewController {
 extension GameMapViewController {
 
     func makePlaceMarkerFromRecord(uid : String, geoRecord : Record!) {
-        DispatchQueue.main.async {
-            
-            let recordData = geoRecord.get().deepDict
-            if let locationObj = recordData["location"] as? [String : Any?] {
-                if let latLng = locationObj["coordinates"] as? [String : Double] {
+        let recordData = geoRecord.get().deepDict
+        if let locationObj = recordData["location"] as? [String : Any?] {
+            if let latLng = locationObj["coordinates"] as? [String : Double] {
+                if self.recordsOnMap[geoRecord.name()] == nil {
                     let coinCoord = CLLocationCoordinate2D(latitude: latLng["lat"]!, longitude: latLng["lng"]!)
                     let type = recordData["type"] as? String!
                     let hex = recordData["color"] as? String!
-                    let marker = type == "coin" ? WWCoinMarker(coordinate: coinCoord) : WWCrumbMarker(coordinate: coinCoord, hex: hex!)
-                    marker.record = geoRecord
-                    marker.coinData = ["uid" : uid]
-                    marker.map = self.mapView
-                    self.recordsOnMap[geoRecord.name()] = marker
                     geoRecord.subscribe("owner", recordPathChangedCallback: self, triggerNow: false)
                     self.recordsSubscribed["owner"] = geoRecord
+                    DispatchQueue.main.async {
+                        let marker = type == "coin" ? WWCoinMarker(coordinate: coinCoord) : WWCrumbMarker(coordinate: coinCoord, hex: hex!)
+                        marker.record = geoRecord
+                        marker.coinData = ["uid" : uid]
+                        self.recordsOnMap[geoRecord.name()] = marker
+                        marker.map = self.mapView
+                        let coinRadarView = UIImageView.init(image: UIImage(named: "bitcoin-icon")?.resized(withPercentage: CGFloat(kCoinPercent)))
+                        coinRadarView.isHidden = true
+                        self.mapView.addSubview(coinRadarView)
+                        self.recordsOnRadar[geoRecord.name()] = coinRadarView
+                        
+                        
+                    }
                 }
             }
         }
@@ -230,6 +274,7 @@ extension GameMapViewController {
 }
 // MARK: DS Client Listeners
 extension GameMapViewController: RecordReadyListener, RecordChangedCallback, RecordPathChangedCallback {
+    
     /*!
      @brief Called when the listener is added via <code>Record.subscribe(String,RecordPathChangedCallback,boolean)</code><br/>
      Will contain the data under the path, regardless of whether triggered by a Patch or Update
@@ -242,10 +287,7 @@ extension GameMapViewController: RecordReadyListener, RecordChangedCallback, Rec
         let recordPrefix = recordNameArray[0]
         if (recordPrefix == "object") {
             if (path == "owner") {
-                DispatchQueue.main.async {
-                    self.removeOldMarker(uid : recordName)
-                }
-                
+                self.removeOldMarker(name : recordName)
             }
         }
      }
@@ -272,12 +314,10 @@ extension GameMapViewController: RecordReadyListener, RecordChangedCallback, Rec
     func onRecordChanged(_ recordName: String!, data: JsonElement!) {
         let recordNameArray = recordName.components(separatedBy: "/")
         switch recordNameArray[0] {
-        case "nearuser":
-            self.requestRecordsNearUser(data: data)
-        case "object":
-            self.removeOldMarker(uid : recordNameArray[1])
-        default:
-            print("default do nothing:" + recordName)
+            case "nearuser":
+                self.requestRecordsNearUser(data: data)
+            default:
+                print("default do nothing:" + recordName)
         }
     }
 }

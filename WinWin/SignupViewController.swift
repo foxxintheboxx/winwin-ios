@@ -9,15 +9,19 @@
 
 import UIKit
 
-class SignupViewController: UIViewController {
+
+class SignupViewController: ModalViewController {
     
+    @IBOutlet var titleLabelContainerView: UIView!
     @IBOutlet var usernameField: UITextField!
     @IBOutlet var phoneNumberField: UITextField!
     @IBOutlet var passwordField: UITextField!
     @IBOutlet var confirmPasswordField: UITextField!
-    
+    @IBOutlet var doneButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        doneButton.roundedButton()
+        doneButton.backgroundColor = UIColor.init(hexString: kRiverBlue)
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -26,9 +30,6 @@ class SignupViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func cancelSignUp(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
     @IBAction func createAccountAndLogin(_ sender: UIButton) {
         //Check if username exists
         
