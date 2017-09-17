@@ -8,6 +8,7 @@ target 'WinWin' do
   # Pods for WinWin
   pod 'GoogleMaps', '2.1.0'
   pod 'SwiftyJSON', '3.0.0'
-  pod "DeepstreamIO"
+  pod "DeepstreamIO", '2.0.5'
   pod 'SnapKit'
+  pod "Pulsator"
 end
